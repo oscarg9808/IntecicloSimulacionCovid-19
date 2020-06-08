@@ -1,8 +1,8 @@
 //edit these numbers!
 let pTransmission = 0.2; //on each collision
 let pRecovery = 0.002; //on each screen draw
-let pDeath = 0.0001; //on each screen draw
-let numberOfBalls = 100; //increase this to make things more crowded
+let pDeath = 0.01; //on each screen draw
+let numberOfBalls = 1000; //increase this to make things more crowded
 let diam = 20; //this also increases the chance of transmission
 let pStayAtHome = 0.5; //increase this to flatten the curve!
 

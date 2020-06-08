@@ -24,7 +24,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
      */
     public VistaPrincipal() {
         initComponents();
-        //setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        setExtendedState(JFrame.MAXIMIZED_BOTH); 
     }
 
     /**
@@ -47,10 +47,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         exitMenuItem = new javax.swing.JMenuItem();
         btnSimulacion = new javax.swing.JMenu();
         btnContagios = new javax.swing.JMenuItem();
-        btnPlanificacion = new javax.swing.JMenuItem();
-        btnResultados = new javax.swing.JMenu();
-        btnEstadisticas = new javax.swing.JMenuItem();
-        btnGraficas = new javax.swing.JMenuItem();
         btnsalir = new javax.swing.JMenu();
         btncerrar = new javax.swing.JMenuItem();
 
@@ -129,39 +125,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         });
         btnSimulacion.add(btnContagios);
 
-        btnPlanificacion.setMnemonic('y');
-        btnPlanificacion.setText("Planificacion y modelado");
-        btnPlanificacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPlanificacionActionPerformed(evt);
-            }
-        });
-        btnSimulacion.add(btnPlanificacion);
-
         menuBar.add(btnSimulacion);
-
-        btnResultados.setMnemonic('h');
-        btnResultados.setText("Resultados");
-
-        btnEstadisticas.setMnemonic('c');
-        btnEstadisticas.setText("Estadisticas");
-        btnEstadisticas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEstadisticasActionPerformed(evt);
-            }
-        });
-        btnResultados.add(btnEstadisticas);
-
-        btnGraficas.setMnemonic('a');
-        btnGraficas.setText("Graficas");
-        btnGraficas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGraficasActionPerformed(evt);
-            }
-        });
-        btnResultados.add(btnGraficas);
-
-        menuBar.add(btnResultados);
 
         btnsalir.setText("Salir");
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
@@ -230,28 +194,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnContagiosActionPerformed
 
-    private void btnPlanificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlanificacionActionPerformed
-        // TODO add your handling code here:
-        VistaPlanificacion vistaPlanificacion = new VistaPlanificacion();
-        add(vistaPlanificacion);
-        vistaPlanificacion.setVisible(true);
-        
-    }//GEN-LAST:event_btnPlanificacionActionPerformed
-
-    private void btnEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadisticasActionPerformed
-        // TODO add your handling code here:
-        VistaResultados vistaResultados = new VistaResultados();
-        add(vistaResultados);
-        vistaResultados.setVisible(true);
-    }//GEN-LAST:event_btnEstadisticasActionPerformed
-
-    private void btnGraficasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficasActionPerformed
-        // TODO add your handling code here:
-        VistaResultados vistaResultados = new VistaResultados();
-        add(vistaResultados);
-        vistaResultados.setVisible(true);
-    }//GEN-LAST:event_btnGraficasActionPerformed
-
     private void btndataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndataActionPerformed
         VistaDatos vd = new VistaDatos();
         add(vd);
@@ -319,14 +261,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem btnContagios;
-    private javax.swing.JMenuItem btnEstadisticas;
-    private javax.swing.JMenuItem btnGraficas;
-    private javax.swing.JMenuItem btnPlanificacion;
     private javax.swing.JMenuItem btnPolinomial;
     private javax.swing.JMenuItem btnProbabilistico;
     private javax.swing.JMenuItem btnRefresh;
     private javax.swing.JMenu btnRegresion;
-    private javax.swing.JMenu btnResultados;
     private javax.swing.JMenuItem btnSIR;
     private javax.swing.JMenu btnSimulacion;
     private javax.swing.JMenuItem btncerrar;

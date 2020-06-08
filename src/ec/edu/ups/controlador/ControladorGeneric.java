@@ -57,7 +57,7 @@ public class ControladorGeneric {
        public static  double [] generarX(int inicio,double []y){
        double x[] = new double[y.length];
         for (int i = inicio; i < y.length; i++) {
-            x[i] = i + 1;
+            x[i] = i;
         }
         return x;
    } 

@@ -25,7 +25,7 @@ out <- as.data.frame(out*N)
 out$time <- NULL
 
 
-png("C:\\Users\\opizarro\\Documents\\NetBeansProjects\\ProyectoSimulacion\\images\\Sir\\sir.png",
+png("../images/Sir/sir.png",
     width=5000,height=3000,units="px",
     pointsize=12,bg="white",res=300)
 

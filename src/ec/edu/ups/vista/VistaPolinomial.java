@@ -22,6 +22,7 @@ public class VistaPolinomial extends javax.swing.JInternalFrame {
         initComponents();
         this.setClosable(true);
         setTitle("Polinomial");
+        
     }
 
     /**
@@ -34,7 +35,7 @@ public class VistaPolinomial extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         btnInfectados = new javax.swing.JToggleButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblImagen = new javax.swing.JLabel();
         btnFallecidos = new javax.swing.JToggleButton();
         btnRecuperados = new javax.swing.JToggleButton();
 
@@ -47,7 +48,7 @@ public class VistaPolinomial extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnInfectados, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 630, 370));
+        getContentPane().add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 770, 490));
 
         btnFallecidos.setText("Ver Fallecidos");
         btnFallecidos.addActionListener(new java.awt.event.ActionListener() {
@@ -75,19 +76,28 @@ public class VistaPolinomial extends javax.swing.JInternalFrame {
         
        String comando = "cd octave && C:\\Octave\\Octave-5.2.0\\mingw64\\bin\\octave.bat .\\polinomialc.m";
        ControladorGeneric.ejecutarComando(comando);
+       Image a = new ImageIcon("images/polinomial/polinomialc.jpg").getImage();
+       ImageIcon b = new ImageIcon(a.getScaledInstance(700, 400, Image.SCALE_SMOOTH));
        
+      lblImagen.setIcon(b);
     }//GEN-LAST:event_btnInfectadosActionPerformed
 
     private void btnFallecidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFallecidosActionPerformed
         // TODO add your handling code here:
         String comando = "cd octave && C:\\Octave\\Octave-5.2.0\\mingw64\\bin\\octave.bat .\\polinomialf.m";
        ControladorGeneric.ejecutarComando(comando);
+       Image a = new ImageIcon("images/polinomial/polinomialf.jpg").getImage();
+       ImageIcon b = new ImageIcon(a.getScaledInstance(700, 400, Image.SCALE_SMOOTH));
+        lblImagen.setIcon(b);
     }//GEN-LAST:event_btnFallecidosActionPerformed
 
     private void btnRecuperadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecuperadosActionPerformed
         // TODO add your handling code here:
         String comando = "cd octave && C:\\Octave\\Octave-5.2.0\\mingw64\\bin\\octave.bat .\\polinomialr.m";
        ControladorGeneric.ejecutarComando(comando);
+        Image a = new ImageIcon("images/polinomial/polinomialr.jpg").getImage();
+       ImageIcon b = new ImageIcon(a.getScaledInstance(700, 400, Image.SCALE_SMOOTH));
+        lblImagen.setIcon(b);
     }//GEN-LAST:event_btnRecuperadosActionPerformed
 
 
@@ -95,6 +105,6 @@ public class VistaPolinomial extends javax.swing.JInternalFrame {
     private javax.swing.JToggleButton btnFallecidos;
     private javax.swing.JToggleButton btnInfectados;
     private javax.swing.JToggleButton btnRecuperados;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblImagen;
     // End of variables declaration//GEN-END:variables
 }

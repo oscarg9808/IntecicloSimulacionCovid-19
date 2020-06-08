@@ -5,8 +5,14 @@
  */
 package ec.edu.ups.vista;
 
+import ec.edu.ups.controlador.ControladorGeneric;
 import ec.edu.ups.controlador.ControladorProbabilidad;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.Arrays;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import org.math.plot.Plot2DPanel;
 
 /**
  *
@@ -14,6 +20,9 @@ import java.util.Arrays;
  */
 public class VistaProbabilidad extends javax.swing.JInternalFrame {
     ControladorProbabilidad controladorProbabilidad;
+    //Objeto que permite graficar
+    private Plot2DPanel plot = new Plot2DPanel();
+
     /**
      * Creates new form VistaProbabilidad
      */
@@ -35,6 +44,8 @@ public class VistaProbabilidad extends javax.swing.JInternalFrame {
 
         btnCalcular = new javax.swing.JButton();
         cmbTipo = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        txtDias = new javax.swing.JTextField();
 
         btnCalcular.setText("Calcular");
         btnCalcular.addActionListener(new java.awt.event.ActionListener() {
@@ -45,16 +56,25 @@ public class VistaProbabilidad extends javax.swing.JInternalFrame {
 
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Confirmados", "Fallecidos", "Recuperados" }));
 
+        jLabel1.setText("Dias a predecir");
+
+        txtDias.setText("30");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(63, 63, 63)
-                .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(94, 94, 94)
-                .addComponent(btnCalcular)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(btnCalcular))
+                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -62,8 +82,11 @@ public class VistaProbabilidad extends javax.swing.JInternalFrame {
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCalcular)
-                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(304, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();
@@ -72,16 +95,72 @@ public class VistaProbabilidad extends javax.swing.JInternalFrame {
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
         // TODO add your handling code here:
         String opcion = cmbTipo.getSelectedItem().toString().trim();
-        double []datos = controladorProbabilidad.calcularProbabilistico(opcion, 20);
+        int dias = Integer.parseInt(txtDias.getText());
+        double []datos = controladorProbabilidad.calcularProbabilistico(opcion, dias);
+        double y[] = new double[datos.length-dias];
+        
+        System.arraycopy(datos,
+                0,/*desde donde copiar el array a*/
+                y,/**/
+                0,/*la posicion en donde empieza el otro array(inicio)*/
+                y.length /*cuantos datos a partir del inicio va a copiar*/
+        ); 
+        
+        
+        
+        double ypred [] = new double[dias];
+
+        
+       
+        double []xpred = ControladorGeneric.generarX(datos.length-dias, datos);
+        ypred =datos;
+        xpred = ControladorGeneric.generarX(0, ypred);
+        double x[] = ControladorGeneric.generarX(0, y);
+  
+        /**
+         * parte dedicada a la graficacion
+        
+        */
+        
+
+        //Generar Ventana
+        JFrame frame = new JFrame("Grafica");
+        
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(600, 500);
+        frame.add(construirPanelPrincipal());
+        frame.setVisible(true);
+       
+        
+        plot.removeAllPlots();
+        plot.addScatterPlot("Predecido", Color.BLUE, xpred, ypred);
+        plot.addScatterPlot("Reales", Color.GREEN, x, y);
+       
+        //plot.addLinePlot("Prediccion", x, y);
+        plot.addLegend("EAST");
+        /*Container c = frame.getContentPane();
+        BufferedImage im = new BufferedImage(c.getWidth(), c.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        c.paint(im.getGraphics());
+        */
         
     }//GEN-LAST:event_btnCalcularActionPerformed
 
 
+     //Panel principal que trae los otros paneles para generar la interfaz grafica
+    //ordena los paneles
+    private JPanel construirPanelPrincipal() {
+        JPanel pPrincipal = new JPanel();
+        pPrincipal.setLayout(new BorderLayout());
+        pPrincipal.add(plot, BorderLayout.CENTER);//Se posiciona la grafica en el centro del panel principal
+        return pPrincipal;
+    }
     public void print(String mensaje){
         System.out.println(mensaje);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCalcular;
     private javax.swing.JComboBox<String> cmbTipo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField txtDias;
     // End of variables declaration//GEN-END:variables
 }
