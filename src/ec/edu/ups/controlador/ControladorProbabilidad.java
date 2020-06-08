@@ -28,7 +28,7 @@ public class ControladorProbabilidad {
 
     public double[] calcularProbabilistico(String opcion, int dias) {
         List<Dato> datos = ControladorDato.cargarDatos();
-        double[] y = cargararreglo(opcion, datos);
+        double[] y = cargarArregloDiferencia(opcion, datos);
         //double x[] = ControladorGeneric.generarX(0, y);
         double[] ypred = new double[y.length + dias];
         
@@ -67,21 +67,43 @@ public class ControladorProbabilidad {
         return mediana + ultimoValor;
     }
 
-    private double[] cargararreglo(String opcion, List<Dato> datos) {
+    private double[] cargarArregloDiferencia(String opcion, List<Dato> datos) {
         double resultado[] = new double[datos.size()];
 
         for (int i = 0; i < datos.size(); i++) {
-            Dato dato = datos.get(i);
+            Dato dato1 = datos.get(i);
+            Dato dato2 = datos.get(i-1);
             if (opcion.compareToIgnoreCase("confirmados") == 0) {
-                resultado[i] = dato.getNumeroConfirmado();
+                resultado[i] = dato1.getNumeroConfirmado()-dato2.getNumeroConfirmado();
             }
 
             if (opcion.compareToIgnoreCase("recuperados") == 0) {
-                resultado[i] = dato.getNumeroRecuperados();
+                resultado[i] = dato1.getNumeroRecuperados()-dato2.getNumeroRecuperados();
             }
 
             if (opcion.compareToIgnoreCase("fallecidos") == 0) {
-                resultado[i] = dato.getNumeroFallecido();
+                resultado[i] = dato1.getNumeroFallecido()-dato2.getNumeroFallecido();
+            }
+        }
+
+        return resultado;
+    }
+    
+     private double[] cargarArregloNormal(String opcion, List<Dato> datos) {
+        double resultado[] = new double[datos.size()];
+
+        for (int i = 0; i < datos.size(); i++) {
+            Dato dato1 = datos.get(i);
+            if (opcion.compareToIgnoreCase("confirmados") == 0) {
+                resultado[i] = dato1.getNumeroConfirmado();
+            }
+
+            if (opcion.compareToIgnoreCase("recuperados") == 0) {
+                resultado[i] = dato1.getNumeroRecuperados();
+            }
+
+            if (opcion.compareToIgnoreCase("fallecidos") == 0) {
+                resultado[i] = dato1.getNumeroFallecido();
             }
         }
 
