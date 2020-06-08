@@ -9,6 +9,8 @@ import ec.edu.ups.controlador.ControladorGeneric;
 import java.awt.event.WindowAdapter;
 import javax.swing.JFrame;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import javax.swing.JOptionPane;
 
 
@@ -25,6 +27,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     public VistaPrincipal() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        setTitle("Pandemic Simulator Tool");
     }
 
     /**
@@ -49,6 +52,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnContagios = new javax.swing.JMenuItem();
         btnsalir = new javax.swing.JMenu();
         btncerrar = new javax.swing.JMenuItem();
+        btnAbout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,7 +131,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         menuBar.add(btnSimulacion);
 
-        btnsalir.setText("Salir");
+        btnsalir.setText("More");
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalirActionPerformed(evt);
@@ -141,6 +145,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
         btnsalir.add(btncerrar);
+
+        btnAbout.setText("About");
+        btnAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAboutActionPerformed(evt);
+            }
+        });
+        btnsalir.add(btnAbout);
 
         menuBar.add(btnsalir);
 
@@ -215,8 +227,25 @@ public class VistaPrincipal extends javax.swing.JFrame {
         String comando = "cd python && python refresh_data.py";
         ControladorGeneric.ejecutarComando(comando);
     }//GEN-LAST:event_btnRefreshActionPerformed
-  
-    
+
+    private void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutActionPerformed
+        // TODO add your handling code here:
+        goToURL("https://leninbueno10.wixsite.com/website");
+    }//GEN-LAST:event_btnAboutActionPerformed
+   
+ public static void goToURL(String URL){
+           if (java.awt.Desktop.isDesktopSupported()) {
+            java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+ 
+            if (desktop.isSupported(java.awt.Desktop.Action.BROWSE)) {
+                try {
+                    java.net.URI uri = new java.net.URI(URL);
+                    desktop.browse(uri);
+                } catch (URISyntaxException | IOException ex) { 
+                }
+            }
+        }
+    }
     public void salir(){
             int valor = JOptionPane.showConfirmDialog(this, "¿Desea salir de la aplicacion?");
             if (valor == JOptionPane.YES_OPTION){
@@ -260,6 +289,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem btnAbout;
     private javax.swing.JMenuItem btnContagios;
     private javax.swing.JMenuItem btnPolinomial;
     private javax.swing.JMenuItem btnProbabilistico;

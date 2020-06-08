@@ -32,3 +32,5 @@ title('Modelo Polinomial de Recuperados');
 hold off
 saveas(figure1,'../images/polinomial/polinomialr.jpg')  
 set(figure1,'Visible','off');  
+
+

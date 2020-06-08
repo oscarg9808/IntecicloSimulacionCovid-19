@@ -124,7 +124,7 @@ public class VistaProbabilidad extends javax.swing.JInternalFrame {
         
 
         //Generar Ventana
-        JFrame frame = new JFrame("Grafica");
+        JFrame frame = new JFrame("Modelo Probabilistico "+cmbTipo.getSelectedItem().toString());
         
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(600, 500);

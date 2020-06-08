@@ -26,6 +26,12 @@ public class ControladorProbabilidad {
         }
     }
 
+    /**
+     * Metodo para calcular el modelo probabilistico
+     * @param opcion
+     * @param dias
+     * @return 
+     */
     public double[] calcularProbabilistico(String opcion, int dias) {
         List<Dato> datos = ControladorDato.cargarDatos();
         double[] y = cargararreglo(opcion, datos);

@@ -37,11 +37,11 @@ public class VistaDatos extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jspdatos = new javax.swing.JScrollPane();
         jtbdatos = new javax.swing.JTable();
-        jbtverdatos = new javax.swing.JButton();
+        btnMore = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jbtverdatos1 = new javax.swing.JButton();
 
         setTitle("Datos Covid-19 Italia");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -49,9 +49,6 @@ public class VistaDatos extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setText("Italia");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, -1, -1));
-
-        jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 770, 80));
 
         jtbdatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -68,23 +65,37 @@ public class VistaDatos extends javax.swing.JInternalFrame {
 
         getContentPane().add(jspdatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 860, 360));
 
-        jbtverdatos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jbtverdatos.setText("Ver datos");
-        jbtverdatos.addActionListener(new java.awt.event.ActionListener() {
+        btnMore.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnMore.setText("Ver fuente");
+        btnMore.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtverdatosActionPerformed(evt);
+                btnMoreActionPerformed(evt);
             }
         });
-        getContentPane().add(jbtverdatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, -1, -1));
+        getContentPane().add(btnMore, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, -1, -1));
 
         jLabel3.setText(".");
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 600, 20, -1));
 
+        jbtverdatos1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jbtverdatos1.setText("Ver datos");
+        jbtverdatos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtverdatos1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jbtverdatos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbtverdatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtverdatosActionPerformed
+    private void btnMoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoreActionPerformed
+        VistaPrincipal.goToURL("https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series");
+    }//GEN-LAST:event_btnMoreActionPerformed
+
+    private void jbtverdatos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtverdatos1ActionPerformed
+        // TODO add your handling code here:
         m=0;
         DefaultTableModel modelo=new  DefaultTableModel();
        jtbdatos.setModel(modelo);
@@ -102,27 +113,30 @@ public class VistaDatos extends javax.swing.JInternalFrame {
         modelo.setColumnCount(2);
         String linea;
         String[]valores;
-        File archivo=new File("TotalCasos.csv");
+        File archivo=new File("datos/confirmados.csv");
         try {
             Scanner entrada=new Scanner(archivo);
             while(entrada.hasNext()){
 
                 linea=entrada.nextLine();
+                
                 valores=linea.split(",");
+                
                 m++;
-               
-                modelo.addRow(valores);}
+               String a [] = {m+"",valores[0]};
+                modelo.addRow(a);
+            }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(VistaDatos.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jbtverdatosActionPerformed
+    }//GEN-LAST:event_jbtverdatos1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMore;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JButton jbtverdatos;
+    private javax.swing.JButton jbtverdatos1;
     private javax.swing.JScrollPane jspdatos;
     private javax.swing.JTable jtbdatos;
     // End of variables declaration//GEN-END:variables
