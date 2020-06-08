@@ -5,12 +5,15 @@
  */
 package ec.edu.ups.vista;
 
+import ec.edu.ups.controlador.ControladorProbabilidad;
+import java.util.Arrays;
+
 /**
  *
  * @author opizarro
  */
 public class VistaProbabilidad extends javax.swing.JInternalFrame {
-
+    ControladorProbabilidad controladorProbabilidad;
     /**
      * Creates new form VistaProbabilidad
      */
@@ -18,6 +21,7 @@ public class VistaProbabilidad extends javax.swing.JInternalFrame {
         initComponents();
         this.setClosable(true);
         setTitle("Probabilidad");
+        controladorProbabilidad = new ControladorProbabilidad();
     }
 
     /**
@@ -29,21 +33,55 @@ public class VistaProbabilidad extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnCalcular = new javax.swing.JButton();
+        cmbTipo = new javax.swing.JComboBox<>();
+
+        btnCalcular.setText("Calcular");
+        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularActionPerformed(evt);
+            }
+        });
+
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Confirmados", "Fallecidos", "Recuperados" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(94, 94, 94)
+                .addComponent(btnCalcular)
+                .addContainerGap(141, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCalcular)
+                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(304, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
+        // TODO add your handling code here:
+        String opcion = cmbTipo.getSelectedItem().toString().trim();
+        double []datos = controladorProbabilidad.calcularProbabilistico(opcion, 20);
+        
+    }//GEN-LAST:event_btnCalcularActionPerformed
 
+
+    public void print(String mensaje){
+        System.out.println(mensaje);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCalcular;
+    private javax.swing.JComboBox<String> cmbTipo;
     // End of variables declaration//GEN-END:variables
 }

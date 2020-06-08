@@ -12,9 +12,9 @@ package ec.edu.ups.modelo;
 public class Dato {
     
     private int numeroDia;
-    private int numeroFallecido;
-    private int numeroConfirmado;
-    private int numeroRecuperados;
+    private double numeroFallecido;
+    private double numeroConfirmado;
+    private double numeroRecuperados;
 
     
     private int numeroPoblacion;
@@ -22,6 +22,15 @@ public class Dato {
     
     public Dato() {
     }
+
+    public Dato(int numeroDia, double numeroFallecido, double numeroConfirmado, double numeroRecuperados, int numeroPoblacion) {
+        this.numeroDia = numeroDia;
+        this.numeroFallecido = numeroFallecido;
+        this.numeroConfirmado = numeroConfirmado;
+        this.numeroRecuperados = numeroRecuperados;
+        this.numeroPoblacion = numeroPoblacion;
+    }
+    
 
     public int getNumeroDia() {
         return numeroDia;
@@ -31,26 +40,31 @@ public class Dato {
         this.numeroDia = numeroDia;
     }
 
-    public int getNumeroFallecido() {
+    public double getNumeroFallecido() {
         return numeroFallecido;
     }
 
-    public void setNumeroFallecido(int numeroFallecido) {
+    public void setNumeroFallecido(double numeroFallecido) {
         this.numeroFallecido = numeroFallecido;
     }
 
-    public int getNumeroConfirmado() {
+    public double getNumeroConfirmado() {
         return numeroConfirmado;
     }
 
-    public void setNumeroConfirmado(int numeroConfirmado) {
+    public void setNumeroConfirmado(double numeroConfirmado) {
         this.numeroConfirmado = numeroConfirmado;
     }
 
-    public int getNumeroRecuperados() {
+    public double getNumeroRecuperados() {
         return numeroRecuperados;
     }
 
+    public void setNumeroRecuperados(double numeroRecuperados) {
+        this.numeroRecuperados = numeroRecuperados;
+    }
+
+    
     public void setNumeroRecuperados(int numeroRecuperados) {
         this.numeroRecuperados = numeroRecuperados;
     }

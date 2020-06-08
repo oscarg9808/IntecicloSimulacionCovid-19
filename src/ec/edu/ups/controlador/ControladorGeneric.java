@@ -7,9 +7,11 @@ package ec.edu.ups.controlador;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,6 +19,48 @@ import java.io.InputStreamReader;
  */
 public class ControladorGeneric {
 
+    
+     public static double[] cargarCSV(String ruta){
+        
+        BufferedReader br = null;
+         ArrayList<Double> lista = new ArrayList();
+        try {
+
+            br = new BufferedReader(new FileReader(ruta));
+            String line = br.readLine();
+
+            while (null != line) {
+                line = br.readLine();
+                lista.add(Double.valueOf(line));
+            }
+
+        } catch (Exception e) {
+
+        } finally {
+            if (null != br) {
+                try {
+                    br.close();
+                } catch (Exception ex) {
+                }
+            }
+        }
+        double[] resultado = new double[lista.size()];
+        for (int i = 0; i < lista.size(); i++) {
+            Double numero = lista.get(i);
+            resultado[i] = numero;
+        }
+        return resultado;
+    }
+    
+     
+    
+       public static  double [] generarX(int inicio,double []y){
+       double x[] = new double[y.length];
+        for (int i = inicio; i < y.length; i++) {
+            x[i] = i + 1;
+        }
+        return x;
+   } 
     public static void ejecutarComando(String comando) {
 
          try{
